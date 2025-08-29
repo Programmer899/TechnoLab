@@ -2,10 +2,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Transform oritentation;
+
     [Header("Movement")]
     public float playerspeed = 5f;
 
-    public Transform oritentation;
+    public float groundDrag = 5f;
+
+    public float jumpForce = 5f;
+    public float jumpCooldown = 0.25f;
+    public float airMultiplier = 0.4f;
+    bool readyToJump = true;
+
+    [Header("Ground Check")]
+    public float playerHeight = 2f;
+    public LayerMask groundLayer;
+    bool grounded;
+
+    [Header("Keybinds")]
+    public KeyCode jumpKey = KeyCode.Space;
 
     float horizontalInput;
     float verticalInput;
@@ -22,7 +37,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        // Check for ground
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer);
+
         UpdateInput();
+        SpeedControl();
+
+        // Handle drag
+        if (grounded)
+            rb.linearDamping = groundDrag;
+        else
+            rb.linearDamping = 0;
     }
 
     private void FixedUpdate()
@@ -32,9 +57,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateInput()
     {
-        // Input
+        // Movement Input
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        // Jump Input
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
+            readyToJump = false;
+
+            Jump();
+
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
     }
 
     private void MovePlayer()
@@ -42,7 +77,29 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement direction
         moveDirection = oritentation.forward * verticalInput + oritentation.right * horizontalInput;
 
-        // Move player
-        rb.AddForce(moveDirection.normalized * playerspeed * 10f, ForceMode.Force);
+        // On ground
+        if (grounded)
+            rb.AddForce(moveDirection.normalized * playerspeed * 10f, ForceMode.Force);
+
+        // In air
+        else if (!grounded)
+            rb.AddForce(moveDirection.normalized * playerspeed * 10f * airMultiplier, ForceMode.Force);
+    }
+
+    private void SpeedControl() {
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        // Limit velocity if needed
+        if (flatVel.magnitude > playerspeed) {
+            Vector3 limitedVel = flatVel.normalized * playerspeed;
+            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+        }
+    }
+
+    private void Jump() {
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+    private void ResetJump() {
+        readyToJump = true;
     }
 }

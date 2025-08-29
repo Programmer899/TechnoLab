@@ -164,7 +164,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -179,13 +179,13 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 762708225}
   - component: {fileID: 762708227}
   - component: {fileID: 762708226}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,8 +430,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83c402e7d5feaf438e483fe7a49222d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  playerspeed: 9
   oritentation: {fileID: 1181612543}
+  playerspeed: 9
+  groundDrag: 5
+  jumpForce: 6
+  jumpCooldown: 0.25
+  airMultiplier: 0.4
+  playerHeight: 0.7
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  jumpKey: 32
 --- !u!54 &762708227
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -517,7 +526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1060089197}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CameraPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +560,7 @@ GameObject:
   - component: {fileID: 1137419368}
   - component: {fileID: 1137419367}
   - component: {fileID: 1137419366}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1181612543}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,8 +750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2531d29f2488cff47a1055dfdd946984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCam
-  sensX: 300
-  sensY: 300
+  sensX: 400
+  sensY: 400
   orientation: {fileID: 1181612543}
   normalCamera: {fileID: 330585545}
   thirdCameraPerspective: 0
@@ -750,7 +759,7 @@ MonoBehaviour:
   thirdCamera: {fileID: 1403604569}
   thirdPersonLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 192
 --- !u!1 &1384385544
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,7 +772,7 @@ GameObject:
   - component: {fileID: 1384385548}
   - component: {fileID: 1384385547}
   - component: {fileID: 1384385546}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1013,7 +1022,7 @@ GameObject:
   - component: {fileID: 1481931997}
   - component: {fileID: 1481931996}
   - component: {fileID: 1481931995}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

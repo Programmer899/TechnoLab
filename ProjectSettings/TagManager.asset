@@ -8,11 +8,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - ThirdCameraHIt
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - ThirdCameraHIt
+  - ThirdCameraHIt/Ground
   - 
   - 
   - 
