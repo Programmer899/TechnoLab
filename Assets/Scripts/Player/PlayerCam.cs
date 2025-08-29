@@ -7,6 +7,13 @@ public class PlayerCam : MonoBehaviour
 
     public Transform orientation;
 
+    public Camera normalCamera;
+
+    public bool thirdCameraPerspective;
+    public Vector3 thirdCameraOriginPosition = new(0, 0, -3);
+    public Camera thirdCamera;
+    public LayerMask thirdPersonLayerMask;
+
     float xRotation;
     float yRotation;
 
@@ -30,5 +37,42 @@ public class PlayerCam : MonoBehaviour
         // rotate cam and orientation
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            thirdCameraPerspective = !thirdCameraPerspective;
+        }
+
+        UpdateCamera();
+        UpdateThirdCamera();
+    }
+
+    void UpdateCamera()
+    {
+        if (thirdCameraPerspective)
+        {
+            normalCamera.gameObject.SetActive(false);
+            thirdCamera.gameObject.SetActive(true);
+        }
+        else
+        {
+            normalCamera.gameObject.SetActive(true);
+            thirdCamera.gameObject.SetActive(false);
+        }
+    }
+
+    void UpdateThirdCamera()
+    {
+        Debug.Log(Vector3.Distance(normalCamera.transform.position, thirdCameraOriginPosition));
+
+        RaycastHit hit;
+        if (Physics.Raycast(normalCamera.transform.position, -normalCamera.transform.forward, out hit, Vector3.Distance(normalCamera.transform.position, thirdCameraOriginPosition), thirdPersonLayerMask))
+        {
+            thirdCamera.transform.position = hit.point + (normalCamera.transform.forward * 0.2f);
+        }
+        else
+        {
+            thirdCamera.transform.position = normalCamera.transform.position + normalCamera.transform.TransformDirection(thirdCameraOriginPosition);
+        }
     }
 }
