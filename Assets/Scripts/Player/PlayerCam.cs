@@ -63,8 +63,6 @@ public class PlayerCam : MonoBehaviour
 
     void UpdateThirdCamera()
     {
-        Debug.Log(Vector3.Distance(normalCamera.transform.position, thirdCameraOriginPosition));
-
         RaycastHit hit;
         if (Physics.Raycast(normalCamera.transform.position, -normalCamera.transform.forward, out hit, Vector3.Distance(normalCamera.transform.position, thirdCameraOriginPosition), thirdPersonLayerMask))
         {
