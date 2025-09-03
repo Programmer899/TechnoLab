@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NewFloorMat
-  m_Shader: {fileID: -6465566751694194690, guid: 578d470ac9e6c7e4393f28f08f2c65d5, type: 3}
+  m_Name: TestFloorMat
+  m_Shader: {fileID: -6465566751694194690, guid: 338b39a208baa66499da6cf314c7b4c7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -31,8 +31,7 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -56,17 +55,20 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _LargeGrid: {r: 8, g: 8, b: 0, a: 0}
+    - _LargeGrid: {r: 3, g: 3, b: 0, a: 0}
     - _LargeGrid_Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _LargeGrid_Thickness: {r: 0.3, g: 0.3, b: 0, a: 0}
-    - _MediumGrid: {r: 4, g: 4, b: 0, a: 0}
+    - _LargeGrid_Thickness: {r: 0.7, g: 0.7, b: 0, a: 0}
+    - _Large_Grid_Dif: {r: 3, g: 3, b: 0, a: 0}
+    - _MediumGrid: {r: 2, g: 2, b: 0, a: 0}
     - _MediumGrid_Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _MediumGrid_Thickness: {r: 0.3, g: 0.3, b: 0, a: 0}
+    - _MediumGrid_Thickness: {r: 0.8, g: 0.8, b: 0, a: 0}
+    - _Medium_Grid_Diff: {r: 6, g: 6, b: 0, a: 0}
     - _Pixelation: {r: 32, g: 32, b: 0, a: 0}
     - _SmallGrid: {r: 1, g: 1, b: 0, a: 0}
     - _SmallGrid_Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _SmallGrid_Thickness: {r: 0.1, g: 0.1, b: 0, a: 0}
-    - _UVOffset: {r: 0.05, g: 0.05, b: 0, a: 0}
+    - _SmallGrid_Thickness: {r: 0.9, g: 0.9, b: 0, a: 0}
+    - _Small_Grid_Diff: {r: 9, g: 9, b: 0, a: 0}
+    - _UVOffset: {r: 0, g: 0, b: 0, a: 0}
     - _Vector3: {r: 0, g: 0, b: 0, a: 0}
     - _WorldOffset: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
